@@ -1,0 +1,47 @@
+{
+    "checksum": "383105c61b34d26960bf2e66fd782091aeac63b4f8f5b58ec3d47644c37da403",
+    "data": {
+    "id": "7e5c0f1c-772d-4095-91a5-f2932c6b4a3a",
+    "createdAt": 1758968170341,
+    "updatedAt": 1758968170364,
+    "title": "Create a PR description based on the latest cha...",
+    "messages": [
+        {
+            "id": "5a68e26f-0020-420e-a6e5-d240d6600422",
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Create a PR description based on the latest changes that we've been working on"
+                }
+            ],
+            "createdAt": 1758968170363,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Create a PR description based on the latest changes that we've been working on"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "autoAppliedRules": []
+        }
+    ],
+    "isAgent": true,
+    "isNameGenerated": true,
+    "isCustomAgent": false,
+    "isUnitTestsAgent": false,
+    "isE2EAgent": false,
+    "isWebDevAgent": false,
+    "isQnaAgent": false,
+    "isRepoInfoAgent": false,
+    "model": "default"
+}
+}
