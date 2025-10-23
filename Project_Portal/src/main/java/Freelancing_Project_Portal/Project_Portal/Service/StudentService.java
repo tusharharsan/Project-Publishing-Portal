@@ -3,12 +3,14 @@ package Freelancing_Project_Portal.Project_Portal.Service;
 import Freelancing_Project_Portal.Project_Portal.Entity.Application;
 import Freelancing_Project_Portal.Project_Portal.Entity.FeedBack;
 import Freelancing_Project_Portal.Project_Portal.Entity.UserEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public interface StudentService {
     UserEntity getStudetnProfile(String mail);
     UserEntity updateStudentProfile(String mail, Map<String,String> updates);

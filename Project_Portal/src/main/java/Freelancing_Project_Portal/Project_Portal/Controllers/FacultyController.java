@@ -1,6 +1,8 @@
 package Freelancing_Project_Portal.Project_Portal.Controllers;
 
 import Freelancing_Project_Portal.Project_Portal.Config.JwtProvider;
+import Freelancing_Project_Portal.Project_Portal.Entity.Application;
+import Freelancing_Project_Portal.Project_Portal.Entity.FeedBack;
 import Freelancing_Project_Portal.Project_Portal.Entity.Project;
 import Freelancing_Project_Portal.Project_Portal.Entity.UserEntity;
 import Freelancing_Project_Portal.Project_Portal.Service.FacultyService;
@@ -85,7 +87,7 @@ public class FacultyController {
         }
     }
 
-    @GetMapping("/project/{projectId")
+    @GetMapping("/project/{projectId}")
     public ResponseEntity<Project> getProjectById(@PathVariable Long ProjectId){
         try{
             Project project = facultyService.getprojectbyId(ProjectId);
@@ -111,6 +113,88 @@ public class FacultyController {
 
         return new ResponseEntity<>(projects , HttpStatus.OK);
     }
+
+    @GetMapping("/feedbacks/project")
+    public ResponseEntity<List<FeedBack>> getFeedbackforProjectId(@RequestHeader("Authorization") String token , @RequestParam Long ProjectId){
+        try{
+            String email = jwtProvider.getEmailfromToken(token);
+            UserEntity faculty = facultyService.getFacultyByEmail(email);
+            if(faculty==null){
+                return new ResponseEntity<>(null , HttpStatus.NOT_FOUND);
+            }
+            List<FeedBack> feedBackList = facultyService.getFeedbackforPorjectId(ProjectId);
+            return new ResponseEntity<>(feedBackList , HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null , HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("feedbacks/faculty")
+    public ResponseEntity<List<FeedBack>> getFeedbackforFacultyId(@RequestHeader("Authorization") String token){
+        try{
+            String email = jwtProvider.getEmailfromToken(token);
+            UserEntity faculty = facultyService.getFacultyByEmail(email);
+            if(faculty==null){
+                return new ResponseEntity<>(null , HttpStatus.NOT_FOUND);
+            }
+            List<FeedBack> feedBackList = facultyService.getFeedbackforFacultyId(faculty.getId());
+            return new ResponseEntity<>(feedBackList , HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null , HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @GetMapping("/applications/project/{projectId}")
+    public ResponseEntity<List<Application>> getApplicationsForProject(
+            @RequestHeader("Authorization") String token,
+            @PathVariable long projectId) {
+        try {
+            String email = jwtProvider.getEmailfromToken(token);
+            UserEntity faculty = facultyService.getFacultyByEmail(email);
+            if (faculty == null) {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+            List<Application> applications = facultyService.getApplicationsforProjectId(projectId);
+            return new ResponseEntity<>(applications, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/applications")
+    public ResponseEntity<List<Application>> getAllApplications(@RequestHeader("Authorization") String token) {
+        try {
+            String email = jwtProvider.getEmailfromToken(token);
+            UserEntity faculty = facultyService.getFacultyByEmail(email);
+            if (faculty == null) {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+            List<Application> applications = facultyService.getAllApplications(faculty.getId());
+            return new ResponseEntity<>(applications, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/applications/{applicationId}/status")
+    public ResponseEntity<Application> updateApplicationStatus(
+            @RequestHeader("Authorization") String token,
+            @PathVariable long applicationId,
+            @RequestParam String status) {
+        try {
+            String email = jwtProvider.getEmailfromToken(token);
+            UserEntity faculty = facultyService.getFacultyByEmail(email);
+            if (faculty == null) {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+            Application updatedApplication = facultyService.updateApplicationStatus(applicationId, status);
+            return new ResponseEntity<>(updatedApplication, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     
 

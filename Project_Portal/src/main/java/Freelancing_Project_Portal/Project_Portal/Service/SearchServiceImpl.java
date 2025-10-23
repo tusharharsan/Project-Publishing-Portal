@@ -6,6 +6,8 @@ import Freelancing_Project_Portal.Project_Portal.Repository.ProjectRespository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -20,13 +22,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
+
 public class SearchServiceImpl implements SearchService{
 
     @Autowired
     private ProjectRespository projectRespository;
 
-    @Autowired
-    private RestTemplate restTemplate;
+
 
     @Override
     public List<Map<String, Object>> searchProject(String query) throws JsonProcessingException {

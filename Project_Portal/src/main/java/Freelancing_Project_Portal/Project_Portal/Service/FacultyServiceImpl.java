@@ -7,10 +7,12 @@ import Freelancing_Project_Portal.Project_Portal.Repository.ProjectRespository;
 import Freelancing_Project_Portal.Project_Portal.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class FacultyServiceImpl implements FacultyService{
 
     @Autowired
